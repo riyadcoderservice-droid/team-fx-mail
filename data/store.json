@@ -1,0 +1,66 @@
+{
+  "adminPasswordHash": "ad47055f9907b5659fe64fc0cb1c13e2:3087cba586f11de4bc4d67edeab5b103fd32c77c24a0c9f1903398d54c4e4b21342a6ef426b15edff30937554e07d386bf3ae145dca64477f05d87817b16404d",
+  "siteConfig": {
+    "brandName": "TEAM FX",
+    "subtitle": "premium mail",
+    "logoPath": null,
+    "logoDataUrl": null,
+    "noticeBanner": ""
+  },
+  "mailboxes": {
+    "fxneon9345@euploading.com": {
+      "address": "fxneon9345@euploading.com",
+      "localPart": "fx.neon9345",
+      "domain": "euploading.com",
+      "provider": "mailtm",
+      "mailTmId": "6b0720609e11677e3604a0a9",
+      "mailTmPassword": "o8LMuNlDWgbx5ewDkuY",
+      "createdAt": "2026-11-25T17:52:32.537Z"
+    },
+    "fxorbit3983@euploading.com": {
+      "address": "fxorbit3983@euploading.com",
+      "localPart": "fx.orbit3983",
+      "domain": "euploading.com",
+      "provider": "mailtm",
+      "mailTmId": "6b0720841371e6a1a80ef37e",
+      "mailTmPassword": "YTjEI1wA4okuVMbBvG0",
+      "createdAt": "2026-11-25T17:53:08.936Z"
+    },
+    "tfxcheck8794@euploading.com": {
+      "address": "tfxcheck8794@euploading.com",
+      "localPart": "tfxcheck8794",
+      "domain": "euploading.com",
+      "provider": "mailtm",
+      "mailTmId": "6b072085f6c38353ce018a95",
+      "mailTmPassword": "Cvv2iJiq5z86Tu5QpPo",
+      "mailTmToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3OTU2MjkxODksInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJhZGRyZXNzIjoidGZ4Y2hlY2s4Nzk0QGV1cGxvYWRpbmcuY29tIiwiaWQiOiI2YjA3MjA4NWY2YzM4MzUzY2UwMThhOTUiLCJtZXJjdXJlIjp7InN1YnNjcmliZSI6WyIvYWNjb3VudHMvNmIwNzIwODVmNmMzODM1M2NlMDE4YTk1Il19fQ.z3wRoPm6DIcNnU7LXx0YDBwILJo0Xqc2iU4o1XCuxIWMx_KO4nw2cYheIP_i2faHpiAyk5C_d6lokf5BBMjeuA",
+      "createdAt": "2026-11-25T17:53:09.643Z"
+    },
+    "tfxgcheck6116@sharklasers.com": {
+      "address": "tfxgcheck6116@sharklasers.com",
+      "localPart": "tfxgcheck6116",
+      "domain": "sharklasers.com",
+      "provider": "guerrilla",
+      "guerrillaSid": "3hsa1k6vrv546jogqkhbkj621a",
+      "createdAt": "2026-11-25T17:53:10.240Z"
+    },
+    "fxflux7049@euploading.com": {
+      "address": "fxflux7049@euploading.com",
+      "localPart": "fx.flux7049",
+      "domain": "euploading.com",
+      "provider": "mailtm",
+      "mailTmId": "6b0721028bf8c82f92085270",
+      "mailTmPassword": "guv-FI2FZE3QR4B7xaI",
+      "mailTmToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3OTU2MjkzMTYsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJhZGRyZXNzIjoiZnhmbHV4NzA0OUBldXBsb2FkaW5nLmNvbSIsImlkIjoiNmIwNzIxMDI4YmY4YzgyZjkyMDg1MjcwIiwibWVyY3VyZSI6eyJzdWJzY3JpYmUiOlsiL2FjY291bnRzLzZiMDcyMTAyOGJmOGM4MmY5MjA4NTI3MCJdfX0.N8aHjUqEosQb6D_D6jBONTb7pa3F5CeY_iL9kukY5S23U1X3dIHoCeChI9rdshwn2DssZzSO1B3Y90yPWRokQg",
+      "createdAt": "2026-11-25T17:55:15.843Z"
+    },
+    "fxvibe8724@guerrillamailblock.com": {
+      "address": "fxvibe8724@guerrillamailblock.com",
+      "localPart": "fxvibe8724",
+      "domain": "guerrillamailblock.com",
+      "provider": "guerrilla",
+      "guerrillaSid": "dbamhfdkmvhmsqd11tnn6u4926",
+      "createdAt": "2026-11-25T17:56:51.014Z"
+    }
+  }
+}
