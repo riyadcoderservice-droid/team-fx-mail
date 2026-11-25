@@ -7,10 +7,8 @@ import {
   PlusCircle,
   LogIn,
   ShieldCheck,
-  UserCheck,
   ChevronRight,
 } from 'lucide-react';
-import type { User } from 'firebase/auth';
 import type { ActiveSection, SiteConfig } from '../types';
 
 const DEFAULT_LOGO = '/src/assets/images/team_fx_emblem_1795625957277.jpg';
@@ -21,7 +19,6 @@ interface HeaderProps {
   onNavigate: (section: ActiveSection) => void;
   drawerOpen: boolean;
   onToggleDrawer: (open: boolean) => void;
-  user: User | null;
   activeAddress: string | null;
   unreadCount: number;
 }
@@ -32,7 +29,6 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigate,
   drawerOpen,
   onToggleDrawer,
-  user,
   activeAddress,
   unreadCount,
 }) => {
@@ -80,12 +76,6 @@ export const Header: React.FC<HeaderProps> = ({
       title: 'Mail Login',
       bangla: 'মেইল নাম দিয়ে লগইন',
       icon: <LogIn className="w-5 h-5" />,
-    },
-    {
-      id: 'gmail',
-      title: 'Gmail Account',
-      bangla: user ? 'একাউন্ট সিঙ্ক চালু' : 'জিমেইল দিয়ে লগইন করুন',
-      icon: <UserCheck className="w-5 h-5" />,
     },
     {
       id: 'admin',
@@ -156,26 +146,15 @@ export const Header: React.FC<HeaderProps> = ({
             })}
           </nav>
 
-          {/* Zone 3: Gmail Action + Top-Right Three-Line Menu */}
+          {/* Zone 3: Quick Create CTA + Top-Right Three-Line Menu */}
           <div className="flex items-center gap-3 shrink-0">
             <button
               type="button"
-              onClick={() => onNavigate('gmail')}
-              className="hidden sm:inline-flex btn-obsidian px-4 py-2 text-xs shrink-0"
+              onClick={() => onNavigate('create')}
+              className="hidden sm:inline-flex btn-gold px-4 py-2 text-xs shrink-0"
             >
-              {user?.photoURL ? (
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName || 'Gmail User'}
-                  referrerPolicy="no-referrer"
-                  className="w-4 h-4 rounded-full object-cover"
-                />
-              ) : (
-                <UserCheck className="w-4 h-4 text-[#E5B869]" />
-              )}
-              <span className="max-w-[130px] truncate">
-                {user ? user.displayName || user.email : 'Gmail Login'}
-              </span>
+              <PlusCircle className="w-4 h-4" />
+              <span>নতুন মেইল</span>
             </button>
 
             <button
@@ -273,11 +252,9 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-[#1E2230] space-y-3">
+            <div className="pt-6 mt-6 border-t border-[#1E2230]">
               <div className="text-xs font-bold text-[#94A3B8]">
-                {user
-                  ? `জিমেইল সংযুক্ত: ${user.email}`
-                  : 'জিমেইল লগইন করলে আপনার সব টেম্প মেইল সেভ থাকবে।'}
+                কোনো একাউন্ট বা আইডি ছাড়াই সম্পূর্ণ ফিচার ব্যবহার করুন।
               </div>
             </div>
           </aside>
