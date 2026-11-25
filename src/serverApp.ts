@@ -6,6 +6,10 @@ import crypto from 'crypto';
 
 const MAILTM_BASE = 'https://api.mail.tm';
 const GUERRILLA_BASE = 'https://api.guerrillamail.com/ajax.php';
+const UPSTREAM_HEADERS = {
+  Accept: 'application/json',
+  'User-Agent': 'Mozilla/5.0 (compatible; TeamFXMail/1.0)',
+};
 const GUERRILLA_DOMAINS = [
   'guerrillamailblock.com',
   'sharklasers.com',
@@ -356,6 +360,7 @@ async function createGuerrillaMailbox(
   try {
     const initResp = await fetch(`${GUERRILLA_BASE}?f=get_email_address&lang=en`, {
       signal: AbortSignal.timeout(8000),
+      headers: UPSTREAM_HEADERS,
     });
     if (!initResp.ok) return null;
     const initData = (await initResp.json()) as {
@@ -369,7 +374,7 @@ async function createGuerrillaMailbox(
       `${GUERRILLA_BASE}?f=set_email_user&email_user=${encodeURIComponent(
         localPart
       )}&lang=en&sid_token=${encodeURIComponent(sid)}`,
-      { signal: AbortSignal.timeout(8000) }
+      { signal: AbortSignal.timeout(8000), headers: UPSTREAM_HEADERS }
     );
     if (!setResp.ok) return null;
     const setData = (await setResp.json()) as {
@@ -1190,6 +1195,15 @@ export function createApp(): Express {
     }
 
     res.json({ deleted: msgId });
+  });
+
+  app.use('/api/*', (_req: Request, res: Response) => {
+    res.status(404).json({ error: 'API route not found.' });
+  });
+
+  app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+    const message = err instanceof Error ? err.message : 'Internal server error';
+    res.status(500).json({ error: message });
   });
 
   return app;
