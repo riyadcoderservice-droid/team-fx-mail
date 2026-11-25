@@ -9,7 +9,7 @@ import {
   Trash2,
   Shield,
   KeyRound,
-  UserCheck,
+  Zap,
 } from 'lucide-react';
 import type { ActiveSection, MailboxSession } from '../types';
 
@@ -47,13 +47,13 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
             <span aria-hidden="true">·</span>
             <span>প্রিমিয়াম এডিশন</span>
             <span aria-hidden="true">·</span>
-            <span>রিয়েল লাইভ মেইল ও OTP সাপোর্ট</span>
+            <span>কোনো আইডি ছাড়াই ব্যবহার করুন</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#F8FAFC] leading-tight">
             তাৎক্ষণিক ও রিয়েল প্রিমিয়াম টেম্প মেইল
           </h1>
           <p className="text-sm sm:text-base font-bold text-[#94A3B8] leading-relaxed max-w-2xl">
-            আসল ডোমেইনসহ রিয়েল ইমেইল তৈরি করুন, সাথে সাথে পরিবর্তন বা ডিলিট করুন, এবং যেকোনো ওয়েবসাইট বা অ্যাপ থেকে আসা আসল মেসেজ ও OTP কোড সরাসরি ইনবক্সে দেখুন।
+            কোনো একাউন্ট বা জিমেইল লগইন ছাড়াই আসল ডোমেইনসহ রিয়েল ইমেইল তৈরি করুন, সাথে সাথে পরিবর্তন বা ডিলিট করুন, এবং যেকোনো ওয়েবসাইট বা অ্যাপ থেকে আসা মেসেজ ও OTP সরাসরি ইনবক্সে দেখুন।
           </p>
         </div>
 
@@ -169,22 +169,22 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
         <div className="bg-[#12141C] border border-[#232736] rounded-xl p-6 flex flex-col justify-between space-y-5">
           <div className="space-y-3">
             <div className="w-11 h-11 rounded-xl bg-gradient-to-b from-[#212638] to-[#151824] border border-[#303750] flex items-center justify-center text-[#E5B869]">
-              <UserCheck className="w-5 h-5" />
+              <Zap className="w-5 h-5" />
             </div>
             <h2 className="text-lg font-extrabold text-[#F8FAFC]">
-              জিমেইল একাউন্ট ও অ্যাডমিন
+              সরাসরি ব্যবহার ও অ্যাডমিন
             </h2>
             <p className="text-sm font-bold text-[#94A3B8] leading-relaxed">
-              জিমেইল দিয়ে সাইন-ইন করে আপনার তৈরি করা সব মেইল সেভ রাখুন এবং অ্যাডমিন প্যানেল থেকে ওয়েবের লোগো পরিবর্তন করুন।
+              কোনো আইডি তৈরি করা ছাড়াই সরাসরি মেইল ব্যবহার করুন এবং অ্যাডমিন প্যানেল থেকে ওয়েবের লোগো ও সেটিংস পরিবর্তন করুন।
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2.5">
             <button
               type="button"
-              onClick={() => onNavigate('gmail')}
+              onClick={() => onNavigate('mail')}
               className="btn-gold px-4 py-2.5 text-xs sm:text-sm"
             >
-              <span>জিমেইল লগইন</span>
+              <span>ইনবক্স খুলুন</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <button
