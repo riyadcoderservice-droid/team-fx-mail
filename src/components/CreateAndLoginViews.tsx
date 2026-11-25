@@ -7,7 +7,6 @@ import {
   Clock,
   CheckCircle2,
 } from 'lucide-react';
-import type { SavedMailboxRecord } from '../firebase';
 
 interface CreateMailViewProps {
   domains: string[];
@@ -121,7 +120,6 @@ export const CreateMailView: React.FC<CreateMailViewProps> = ({
 
 interface MailLoginViewProps {
   recentAddresses: string[];
-  savedMailboxes: SavedMailboxRecord[];
   activeAddress: string | null;
   loggingIn: boolean;
   error: string | null;
@@ -130,7 +128,6 @@ interface MailLoginViewProps {
 
 export const MailLoginView: React.FC<MailLoginViewProps> = ({
   recentAddresses,
-  savedMailboxes,
   activeAddress,
   loggingIn,
   error,
@@ -143,24 +140,6 @@ export const MailLoginView: React.FC<MailLoginViewProps> = ({
     if (!mailInput.trim()) return;
     await onLoginMail(mailInput.trim());
   };
-
-  const combinedHistory = React.useMemo(() => {
-    const seen = new Set<string>();
-    const list: string[] = [];
-    for (const item of savedMailboxes) {
-      if (!seen.has(item.address)) {
-        seen.add(item.address);
-        list.push(item.address);
-      }
-    }
-    for (const addr of recentAddresses) {
-      if (!seen.has(addr)) {
-        seen.add(addr);
-        list.push(addr);
-      }
-    }
-    return list;
-  }, [savedMailboxes, recentAddresses]);
 
   return (
     <section className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-6">
@@ -198,14 +177,14 @@ export const MailLoginView: React.FC<MailLoginViewProps> = ({
           </button>
         </form>
 
-        {combinedHistory.length > 0 && (
+        {recentAddresses.length > 0 && (
           <div className="pt-4 border-t border-[#1E2230] space-y-3">
             <div className="flex items-center gap-2 text-xs font-extrabold text-[#94A3B8]">
               <Clock className="w-4 h-4 text-[#E5B869]" />
-              <span>সাম্প্রতিক ও সংরক্ষিত মেইলসমূহ</span>
+              <span>সাম্প্রতিক ব্যবহৃত মেইলসমূহ</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {combinedHistory.map((addr) => {
+              {recentAddresses.map((addr) => {
                 const isCurrent = addr === activeAddress;
                 return (
                   <button
