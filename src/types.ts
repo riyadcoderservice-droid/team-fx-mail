@@ -1,4 +1,4 @@
-export type ActiveSection = 'home' | 'mail' | 'create' | 'login' | 'gmail' | 'admin';
+export type ActiveSection = 'home' | 'mail' | 'create' | 'login' | 'admin';
 
 export interface SiteConfig {
   brandName: string;
