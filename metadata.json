@@ -1,0 +1,6 @@
+{
+  "name": "TEAM FX",
+  "description": "TEAM FX Premium Mail — Instant disposable temporary email with live inbox, OTP extraction, Gmail sync, and admin branding.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
