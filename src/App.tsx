@@ -4,22 +4,10 @@
  */
 
 import React from 'react';
-import { onAuthStateChanged, type User } from 'firebase/auth';
-import {
-  auth,
-  ensureUserProfile,
-  removeSavedMailboxFromAccount,
-  saveMailboxToAccount,
-  signInWithGmail,
-  signOutGmail,
-  subscribeUserMailboxes,
-  type SavedMailboxRecord,
-} from './firebase';
 import { Header } from './components/Header';
 import { HomeSection } from './components/HomeSection';
 import { MailWorkspace } from './components/MailWorkspace';
 import { CreateMailView, MailLoginView } from './components/CreateAndLoginViews';
-import { GmailAccountView } from './components/GmailAccountView';
 import { AdminPanel } from './components/AdminPanel';
 import type {
   ActiveSection,
@@ -62,10 +50,6 @@ export default function App() {
   const [createError, setCreateError] = React.useState<string | null>(null);
   const [loginError, setLoginError] = React.useState<string | null>(null);
   const [countdown, setCountdown] = React.useState(5);
-
-  const [user, setUser] = React.useState<User | null>(null);
-  const [authLoading, setAuthLoading] = React.useState(true);
-  const [savedMailboxes, setSavedMailboxes] = React.useState<SavedMailboxRecord[]>([]);
 
   const recordRecentAddress = React.useCallback((address: string) => {
     setRecentAddresses((prev) => {
@@ -117,9 +101,6 @@ export default function App() {
         setSelectedMessage(null);
         setCountdown(5);
         recordRecentAddress(data.address);
-        if (auth.currentUser) {
-          saveMailboxToAccount(auth.currentUser, data.address).catch(() => {});
-        }
         if (navigateToMail) {
           setActiveSection('mail');
         }
@@ -293,33 +274,6 @@ export default function App() {
     return () => clearInterval(timer);
   }, [mailbox?.address, fetchMessages]);
 
-  // Firebase Auth listener & saved mailboxes sync
-  React.useEffect(() => {
-    let unsubMailboxes: (() => void) | null = null;
-    const unsubAuth = onAuthStateChanged(auth, (nextUser) => {
-      setUser(nextUser);
-      setAuthLoading(false);
-      if (unsubMailboxes) {
-        unsubMailboxes();
-        unsubMailboxes = null;
-      }
-      if (nextUser) {
-        void ensureUserProfile(nextUser).catch(() => {});
-        unsubMailboxes = subscribeUserMailboxes(
-          nextUser.uid,
-          (items) => setSavedMailboxes(items),
-          () => {}
-        );
-      } else {
-        setSavedMailboxes([]);
-      }
-    });
-    return () => {
-      unsubAuth();
-      if (unsubMailboxes) unsubMailboxes();
-    };
-  }, []);
-
   const unreadCount = React.useMemo(
     () => messages.filter((m) => !m.seen).length,
     [messages]
@@ -333,7 +287,6 @@ export default function App() {
         onNavigate={setActiveSection}
         drawerOpen={drawerOpen}
         onToggleDrawer={setDrawerOpen}
-        user={user}
         activeAddress={mailbox?.address || null}
         unreadCount={unreadCount}
       />
@@ -392,35 +345,10 @@ export default function App() {
         {activeSection === 'login' && (
           <MailLoginView
             recentAddresses={recentAddresses.filter((a) => !a.endsWith('@teamfx.mail'))}
-            savedMailboxes={savedMailboxes}
             activeAddress={mailbox?.address || null}
             loggingIn={loggingInMail}
             error={loginError}
             onLoginMail={loginToMailbox}
-          />
-        )}
-
-        {activeSection === 'gmail' && (
-          <GmailAccountView
-            user={user}
-            authLoading={authLoading}
-            savedMailboxes={savedMailboxes}
-            activeAddress={mailbox?.address || null}
-            onSignInGmail={async () => {
-              await signInWithGmail();
-            }}
-            onSignOutGmail={signOutGmail}
-            onSaveCurrentMailbox={async () => {
-              if (user && mailbox) {
-                await saveMailboxToAccount(user, mailbox.address);
-              }
-            }}
-            onOpenSavedMailbox={loginToMailbox}
-            onRemoveSavedMailbox={async (addr) => {
-              if (user) {
-                await removeSavedMailboxFromAccount(user, addr);
-              }
-            }}
           />
         )}
 
